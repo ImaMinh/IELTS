@@ -1,5 +1,29 @@
-.customCardStyle{
-    width: 200px;
-    height: 300px;
-    text-overflow: ellipsis;
-};
+.blur{
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(8px); 
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 50px;
+}
+
+.divider{
+    color: white;
+    background-color: rgb(0,21,41);
+    height: 100%;
+    width: 11rem;
+    padding: 0.5rem;
+    border-radius: 50px;
+}
+
+.essay-wrapper{
+    border-radius: 30px;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(8px); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.essay-wrapper_header{
+    background: transparent;
+}

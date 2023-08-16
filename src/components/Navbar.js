@@ -32,7 +32,7 @@ const Navbar = () => {
   return( 
     <div className="navbar">
       <div> LOGO </div>
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{width: "100%"}}/>
+      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{width: "100%"}} theme="dark"/>
     </div>);
 };
 
