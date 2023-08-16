@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-function App() {
+import Homepage from './pages/Homepage';
+import Essay from './pages/Essay';
+import { ConfigProvider } from "antd";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider theme={{ token: { colorPrimary: '#ED4192' } }}>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/essay" element={<Essay/>} />
+        </Routes>
+      </BrowserRouter>
+    </ConfigProvider>
   );
 }
 
 export default App;
+
+
+
+
+
