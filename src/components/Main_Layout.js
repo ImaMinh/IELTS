@@ -16,7 +16,7 @@ const MinhLayout = ({ head, body, footer }) => {
         <Layout style={{backgroundImage: `url(${background})` }}>
             <Header>{head}</Header>
             <Content>{body}</Content>
-            <Footer>{footer}</Footer>
+            <Footer style={{backgroundColor: "#fff0f6"}}>{footer}</Footer>
         </Layout>
       </>
     );

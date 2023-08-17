@@ -5,11 +5,16 @@ import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { fetchTests } from "../api/api";
 import '../css/homepage.css';
 import { Content, Header } from "antd/es/layout/layout";
+import Introduction from "./Introduction";
+import cherryVideo from "../assets/cherry_video.mp4";
+
 const HomeBody = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
 
   const cardsPerPage = 9; // Number of cards to display per page
+
+  const isMobile = window.innerWidth <= 780;
 
   const fetchData = async () => {
     const testData = await fetchTests();
@@ -37,10 +42,17 @@ const HomeBody = () => {
 
         <Col xs={24} sm={24} lg={20}>
             <Layout  className="essay-wrapper">
-                <Header className="essay-wrapper_header" align="center" justify="center">
+                <Header className="essay-wrapper_header">
+                    Essays
+                </Header>
+                <br/>
+                <Content>
                     <Breadcrumb
                         align="center"
                         justify="center"
+                        style={{
+                            marginLeft : "1rem"
+                        }}
                         items={[
                         {
                             href: '',
@@ -55,9 +67,9 @@ const HomeBody = () => {
                         },
                         ]}
                     />
-                </Header>
-                <br/>
-                <Content>
+                    
+                    <br/>
+
                     <Row gutter={[16, 16]}>
                         {data.slice(startIndex, endIndex).map((x, idx) => (
                             <Col key={idx} xs={24} md={8} lg={8} xl={8}>
@@ -81,20 +93,17 @@ const HomeBody = () => {
   };
 
   return (
-    <>
-        <Divider orientation="left" style={{backgroundColor: "white", margin: "0px"}} theme={{
-            token:{
-                colorSplit: "black",
-            }
-        }}>
-            <p className="divider">Introduction</p>
-        </Divider>
-        <Row>
-          <Col span={24}>
-            <p style={{backgroundColor: "white", height: "100%", width: "100%", margin: "0px"}}><h1 style={{margin: "0px"}}>IELTS123</h1></p>
-          </Col>
+    <>  
+        <div style={{overflow: "hidden", margin: 0}}>
+            <video autoPlay muted loop style={{ width: "100%", height: isMobile ? "30rem" :"50rem", objectFit: "cover", display: "block"}}>
+                <source src={cherryVideo} type="video/mp4" />
+            </video>
+        </div>
+        <Row style={{margin: 0, padding: 0}}>
+        <Col span={24}>
+            <Introduction/> 
+        </Col>
         </Row>
-        <Divider orientation="left" style={{backgroundColor: "white", margin: "0px"}}><p className="divider">Essays</p></Divider>
         <br/>
         <br/>
 
