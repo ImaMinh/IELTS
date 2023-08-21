@@ -73,7 +73,7 @@ const HomeBody = () => {
                     <Row gutter={[16, 16]}>
                         {data.slice(startIndex, endIndex).map((x, idx) => (
                             <Col key={idx} xs={24} md={8} lg={8} xl={8}>
-                                <Link to={"/essay"}>
+                                <Link to={`/essay/${x._id}`}>
                                 {/* Card to display */}
                                 <Card title={x.title} hoverable={true}>
                                     <div>{x.text}</div>
@@ -94,15 +94,17 @@ const HomeBody = () => {
 
   return (
     <>  
-        <div style={{overflow: "hidden", margin: 0}}>
-            <video autoPlay muted loop style={{ width: "100%", height: isMobile ? "30rem" :"50rem", objectFit: "cover", display: "block"}}>
+        <div style={{overflow: "hidden", margin: 0, width: "100%", height: isMobile ? "15rem" :"20rem", objectFit: "cover", display: "block", background: "gray"}}>
+            {/* <video autoPlay muted loop style={{ width: "100%", height: isMobile ? "30rem" :"50rem", objectFit: "cover", display: "block"}}>
                 <source src={cherryVideo} type="video/mp4" />
-            </video>
+            </video> */}
+            <h1>Example Banner</h1>
         </div>
-        <Row style={{margin: 0, padding: 0}}>
-        <Col span={24}>
-            <Introduction/> 
-        </Col>
+
+        <Row>
+            <Col span={24}>
+                <Introduction/> 
+            </Col>
         </Row>
         <br/>
         <br/>

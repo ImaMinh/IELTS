@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, theme, Input, Typography } from "antd";
-import { AppstoreOutlined, HomeOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
+import { Link, useParams } from "react-router-dom";
+import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, Typography, Input} from "antd";
+import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { fetchTests } from "../api/api";
-import Homepage from "./Homepage";
-const { Header, Content, Footer, Sider } = Layout;
+import EssayContent from "../components/Essay_Content";
+
+const { Content, Header, Footer, Sider } = Layout;
 const {Text} = Typography;
 
-const Essay = () =>{
-    const [data, setData] = useState([]);
-
-    const fetchData = async () => {
-        const testData = await fetchTests();
-        setData(testData);
-    };
-
-    useEffect(() => {
-    fetchData();
-    }, []);
+const EssayDisplay = () =>{
+    const {essayID} = useParams();
     
     return(
         <>
@@ -49,20 +41,16 @@ const Essay = () =>{
                     padding: 0,
                     background: "white",
                 }}
-                />
+                >
+                    <Input placeholder="search essays here"></Input>
+                </Header>
                 <Content
                 style={{
                     margin: '24px 16px 0',  
                 }}
                 >   
                     <div>
-                        <h1>
-                            Search your essays here
-                        </h1>
-                    </div>
-                    <div><Text strong> with more than 1000 essays</Text></div>
-                    <div>
-                        <Input placeholder="search your essays here"></Input>
+                        <EssayContent ID = {essayID}/>
                     </div>
                 </Content>
             </Layout>
@@ -81,4 +69,4 @@ const Essay = () =>{
     )
 }
 
-export default Essay
+export default EssayDisplay

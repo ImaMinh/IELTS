@@ -15,7 +15,7 @@ const Homepage = () => {
       <ConfigProvider 
         theme={{
           token:{
-            colorPrimary:"#ED4192",
+            colorPrimary:"#1677FF",
           }
         }}>
         <MinhLayout

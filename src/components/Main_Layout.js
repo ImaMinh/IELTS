@@ -13,7 +13,10 @@ import background from '../assets/ielts_background.png';
 const MinhLayout = ({ head, body, footer }) => {
     return (
       <>
-        <Layout style={{backgroundImage: `url(${background})` }}>
+        <Layout style={{
+          //backgroundImage: `url(${background})` 
+          
+        }}>
             <Header>{head}</Header>
             <Content>{body}</Content>
             <Footer style={{backgroundColor: "#fff0f6"}}>{footer}</Footer>
