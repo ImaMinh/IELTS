@@ -15,23 +15,7 @@ const contentStyle = {
   background: "#364d79",
 };
 
-const CardCarousel = ({ cards }) => {
-  return (
-    <Carousel autoplay>
-      {cards.map((card, index) => (
-        <div key={index} style={{ backgroundColor: "transparent" }}>
-          <Card
-            hoverable
-            style={{ width: "100%", height: 176 }}
-            cover={<img alt={card.title} src={card.imageUrl} style={{ height: 88 }} />}
-          >
-            <Meta title={card.title} description={card.description} />
-          </Card>
-        </div>
-      ))}
-    </Carousel>
-  );
-};
+
 
 const Introduction = () => {
   const isMobile = useMediaQuery({ maxWidth: 1221 });
@@ -46,67 +30,9 @@ const Introduction = () => {
     </Header>
   );
 
-  const mobileContent = (
-    <Content
-      style={{      
-        padding: "1.5rem",
-        backgroundColor: "white",
-        paddingLeft: "20%", // Adjust as needed
-        paddingRight: "20%", // Adjust as needed
-      }}
-    >
-      <CardCarousel
-        cards={[
-          { title: "Card 1", imageUrl: "your-image-url-1.jpg", description: "Description for Card 1" },
-          { title: "Card 2", imageUrl: "your-image-url-2.jpg", description: "Description for Card 2" },
-          { title: "Card 3", imageUrl: "your-image-url-3.jpg", description: "Description for Card 3" },
-        ]}
-      />
-    </Content>
-  );
-
-  const commonContent = (
-    <Content
-      style={{      
-        padding: "1.5rem",
-        backgroundColor: "white",
-        paddingLeft: "20%", // Adjust as needed
-        paddingRight: "20%", // Adjust as needed
-      }}
-    >
-      <Row gutter={[40,40]}>
-          <Col>
-            <Card>
-              <Card.Meta title="card1" description="card1" />
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <Card.Meta title="card2" description="card1" />
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <Card.Meta title="card3" description="card1" />
-            </Card>
-          </Col>
-        </Row>
-    </Content>
-  )
-
   return (
     <Layout>
-      {!isMobile ? (
-        <>
-          {commonHeader}
-          {commonContent}
-        </>
-      ) : (
-        <>
-          {commonHeader}
-          {mobileContent}
-        </>
-      )}
+      
       <Footer />
     </Layout>
   );

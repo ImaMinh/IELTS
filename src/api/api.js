@@ -15,3 +15,13 @@ export const fetchTests = async () => {
     throw error;
   }
 };
+
+export const searchTestsByTitle = async (title) => {
+  try {
+    const response = await api.get(`/test-search?title=${title}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error searching for tests:', error.message);
+    throw error;
+  }
+};

@@ -8,7 +8,7 @@ import EssayDisplay from "./pages/EssayDisplay";
 
 const App = () => {
   return (
-    <ConfigProvider theme={{ token: { colorPrimary: '#ED4192' } }}>
+    <ConfigProvider theme={{ token: { colorPrimary: 'white' } }}>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Homepage />} />

@@ -22,7 +22,7 @@ const items = [
   }
 ];
 const Navbar = () => {
-  const [current, setCurrent] = useState('homepage');
+  const [current, setCurrent] = useState('');
  
   const onClick = (e) => {
     console.log('click ', e);

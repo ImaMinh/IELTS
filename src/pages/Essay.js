@@ -4,6 +4,8 @@ import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, t
 import { AppstoreOutlined, HomeOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
 import { fetchTests } from "../api/api";
 import Homepage from "./Homepage";
+import Navbar from "../components/Navbar";
+import Searchbar from "../components/Searchbar";
 const { Header, Content, Footer, Sider } = Layout;
 const {Text} = Typography;
 
@@ -21,28 +23,8 @@ const Essay = () =>{
     
     return(
         <>
-        <Layout hasSider style={{minHeight: "100vh"}}>
-            <Sider
-                collapsedWidth="0"
-                collapsible
-                theme="dark"
-                defaultCollapsed="true"
-                style={{position: "fixed", height: "100vh", top: "0", bottom: "0", zIndex: 1}}
-            >
-                <div className="demo-logo-vertical" />
-                <Menu
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={['4']}
-                items={[
-                    {
-                        label: <Link to={"/"}>Homepage</Link>,
-                        key: "search-bar"
-                    }
-                ]}
-                
-                />
-            </Sider>
+        <Layout style={{minHeight: "100vh"}}>
+            <Navbar/>
             <Layout>
                 <Header
                 style={{
@@ -62,7 +44,7 @@ const Essay = () =>{
                     </div>
                     <div><Text strong> with more than 1000 essays</Text></div>
                     <div>
-                        <Input placeholder="search your essays here"></Input>
+                        <Searchbar></Searchbar>
                     </div>
                 </Content>
             </Layout>

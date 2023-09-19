@@ -93,14 +93,7 @@ const HomeBody = () => {
   };
 
   return (
-    <>  
-        <div style={{overflow: "hidden", margin: 0, width: "100%", height: isMobile ? "15rem" :"20rem", objectFit: "cover", display: "block", background: "gray"}}>
-            {/* <video autoPlay muted loop style={{ width: "100%", height: isMobile ? "30rem" :"50rem", objectFit: "cover", display: "block"}}>
-                <source src={cherryVideo} type="video/mp4" />
-            </video> */}
-            <h1>Example Banner</h1>
-        </div>
-
+    <div style={{minHeight: "100vh"}}>  
         <Row>
             <Col span={24}>
                 <Introduction/> 
@@ -129,7 +122,7 @@ const HomeBody = () => {
             </Col>
         </Row>
         <br/>
-    </>
+    </div>
   );
 };
 
