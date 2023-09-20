@@ -1,0 +1,13 @@
+build
+node_modules
+.git
+.gitignore
+build_and_push.sh
+.next
+
+Dockerfile
+__mocks__
+__tests__
+dist
+
+docker_ver.txt
