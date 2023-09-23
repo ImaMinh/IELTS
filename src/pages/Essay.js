@@ -13,14 +13,14 @@ const Essay = () =>{
     const [data, setData] = useState([]);
 
     const fetchData = async () => {
-        const testData = await fetchTests();
+        const testData = await fetchTests({});
         setData(testData);
     };
 
     useEffect(() => {
-    fetchData();
+        fetchData();
     }, []);
-    
+
     return(
         <>
         <Layout style={{minHeight: "100vh"}}>
@@ -34,9 +34,9 @@ const Essay = () =>{
                 />
                 <Content
                 style={{
-                    margin: '24px 16px 0',  
+                    margin: '24px 16px 0',
                 }}
-                >   
+                >
                     <div>
                         <h1>
                             Search your essays here

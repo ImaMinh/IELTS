@@ -2,7 +2,7 @@ import React from 'react';
 import { ConfigProvider } from 'antd';
 
 //data:
-import { fetchData } from '../api/api.js';
+// import { fetchData } from '../api/api.js';
 
 //components
 import Navbar from '../components/Navbar.js';
@@ -12,7 +12,7 @@ import MinhLayout from '../components/Main_Layout.js';
 
 const Homepage = () => {
     return (
-      <ConfigProvider 
+      <ConfigProvider
         theme={{
           token:{
             colorPrimary:"#1677FF",
@@ -26,5 +26,5 @@ const Homepage = () => {
       </ConfigProvider>
     );
   };
-  
+
   export default Homepage;

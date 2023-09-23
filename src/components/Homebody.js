@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import { Link } from "react-router-dom";
 import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb } from "antd";
 import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
@@ -9,28 +9,31 @@ import Introduction from "./Introduction";
 import cherryVideo from "../assets/cherry_video.mp4";
 
 const HomeBody = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(  {
+      results: [],
+      page: 1,
+      limit: 9,
+      totalPages: 1,
+      totalResults: 0,
+    }
+  );
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
 
   const cardsPerPage = 9; // Number of cards to display per page
 
   const isMobile = window.innerWidth <= 780;
 
-  const fetchData = async () => {
-    const testData = await fetchTests();
+  const fetchData = async (page) => {
+    const testData = await fetchTests({ limit: cardsPerPage, page });
     setData(testData);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handlePageChange = (page) =>{
     setCurrentPage(page)
   }
-  
+
   //render out cards
-  const renderCards = () => {
+  const renderCards = useMemo(() => {
     const startIndex = (currentPage - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
 
@@ -67,16 +70,16 @@ const HomeBody = () => {
                         },
                         ]}
                     />
-                    
+
                     <br/>
 
                     <Row gutter={[16, 16]}>
-                        {data.slice(startIndex, endIndex).map((x, idx) => (
+                        {data.results.map((x, idx) => (
                             <Col key={idx} xs={24} md={8} lg={8} xl={8}>
-                                <Link to={`/essay/${x._id}`}>
+                                <Link to={`/essay/${x.id}`}>
                                 {/* Card to display */}
                                 <Card title={x.title} hoverable={true}>
-                                    <div>{x.text}</div>
+                                  <div>{x.conclusion}</div>
                                 </Card>
                                 </Link>
                             </Col>
@@ -90,13 +93,17 @@ const HomeBody = () => {
         </Row>
       </>
     );
-  };
+  }, [data]);
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
 
   return (
-    <div style={{minHeight: "100vh"}}>  
+    <div style={{minHeight: "100vh"}}>
         <Row>
             <Col span={24}>
-                <Introduction/> 
+                <Introduction/>
             </Col>
         </Row>
         <br/>
@@ -104,7 +111,7 @@ const HomeBody = () => {
 
         {/*Essays section*/}
         <Row>
-            {renderCards()}
+            {renderCards}
         </Row>
 
         <br/>
@@ -113,11 +120,14 @@ const HomeBody = () => {
             <Col xs={20} lg={6} justify="center" align="center">
                 <div className="blur">
                     <Pagination
-                        current={currentPage}
-                        defaultPageSize={cardsPerPage}
-                        onChange={handlePageChange}
-                        total={data.length}
-                    />
+                      size="small"
+                      showTotal={(total) => `Total ${total} items`}
+                      showSizeChanger={false}
+
+                      defaultCurrent={data.page}
+                      total={data.totalResults}
+                      pageSize={data.limit}
+                      onChange={handlePageChange} />
                 </div>
             </Col>
         </Row>

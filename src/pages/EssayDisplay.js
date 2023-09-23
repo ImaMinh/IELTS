@@ -10,7 +10,7 @@ const {Text} = Typography;
 
 const EssayDisplay = () =>{
     const {essayID} = useParams();
-    
+
     return(
         <>
         <Layout hasSider style={{minHeight: "100vh"}}>
@@ -32,7 +32,7 @@ const EssayDisplay = () =>{
                         key: "search-bar"
                     }
                 ]}
-                
+
                 />
             </Sider>
             <Layout>
@@ -46,11 +46,11 @@ const EssayDisplay = () =>{
                 </Header>
                 <Content
                 style={{
-                    margin: '24px 16px 0',  
+                    margin: '24px 16px 0',
                 }}
-                >   
+                >
                     <div>
-                        <EssayContent ID = {essayID}/>
+                        <EssayContent id={essayID}/>
                     </div>
                 </Content>
             </Layout>

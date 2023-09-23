@@ -9,10 +9,19 @@ import Introduction from "./Introduction";
 import cherryVideo from "../assets/cherry_video.mp4";
 import "../css/navbar.css"
 
+let nTimeout = null;
 const Searchbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-  
+    const [searchResults, setSearchResults] = useState({ results: [] });
+
+    const delaySearch = async (keyword) => {
+      try {
+        const results = await searchTestsByTitle( { keyword });
+        setSearchResults(results);
+      } catch (error) {
+        console.error('Error searching for tests:', error);
+      }
+    };
     const handleSearch = async () => {
       const trimmedSearchTerm = searchTerm.trim(); // Trim leading and trailing spaces
 
@@ -21,21 +30,22 @@ const Searchbar = () => {
         setSearchResults([]);
         return;
       }
-      
-      try {
-        const results = await searchTestsByTitle(searchTerm);
-        setSearchResults(results);
-      } catch (error) {
-        console.error('Error searching for tests:', error);
-      }
+
+      clearTimeout(nTimeout);
+      nTimeout = setTimeout(async () => {
+        await delaySearch(searchTerm)
+      }, 300);
+
     };
 
-    const highlightKeywords = (text) => {
+    // keyword có thể trong question hoặc htmlAnswer
+    const highlightKeywords = (result) => {
+      const { htmlAnswer, question } = result;
       const keywords = searchTerm.split(/\s+/); // Split search term into keywords
       const regex = new RegExp(`(${keywords.join('|')})`, 'gi'); // Create regex pattern
-      return text.replace(regex, '<span class="highlight">$1</span>'); // Wrap keywords in <span> tags for highlighting
+      return htmlAnswer.replace(regex, '<span class="highlight">$1</span>'); // Wrap keywords in <span> tags for highlighting
     };
-  
+
     return (
       <div>
         <Input
@@ -45,18 +55,19 @@ const Searchbar = () => {
           onKeyUp={handleSearch}
         />
         {/* <button onClick={handleSearch}>Search</button> */}
-  
+
         <ul>
-          {searchResults.map((result) => (
+          {searchResults.results.map((result) => (
             <li
               key={result._id}
-              dangerouslySetInnerHTML={{ __html: highlightKeywords(result.text) }}
+              // dangerouslySetInnerHTML={{ __html: highlightKeywords(result.textAnswer) }}
+              dangerouslySetInnerHTML={{ __html: highlightKeywords(result) }}
             />
-            
+
           ))}
         </ul>
       </div>
     );
   };
-  
+
   export default Searchbar;
