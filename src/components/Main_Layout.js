@@ -1,25 +1,29 @@
 import React from 'react';
-import { Layout, Col, Row, Divider, Card, Space, ConfigProvider} from 'antd';
-
-//components:
-import Navbar from './Navbar.js';
-
-
-//data:
-import { fetchData } from '../api/api.js';
+import { Layout} from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout.js';
-import background from '../assets/ielts_background.png';
+import Introduction from './Introduction';
+import CAT from './CallToAction';
+import ExampleEssay from './Example_Essay';
+import HomeBody from './Homebody';
 
 const MinhLayout = ({ head, body, footer }) => {
     return (
       <>
-        <Layout style={{
-          //backgroundImage: `url(${background})` 
-          
-        }}>
-            <Header>{head}</Header>
-            <Content>{body}</Content>
-            <Footer style={{backgroundColor: "#fff0f6"}}>{footer}</Footer>
+        <Layout>
+            <div>{head}</div>
+            <section 
+              style={{padding: "1.5rem",
+                borderBottom: "3px solid black",
+              }}
+            >
+                <Introduction></Introduction>
+            </section>
+
+            <CAT/>
+            <section>
+              <ExampleEssay/>
+            </section> 
+            <section>{footer}</section>
         </Layout>
       </>
     );

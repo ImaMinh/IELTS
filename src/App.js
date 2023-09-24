@@ -11,7 +11,7 @@ const App = () => {
     <ConfigProvider theme={{ token: { colorPrimary: 'white' } }}>
       <BrowserRouter basename="/">
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage/>} />
           <Route path="/essay" element={<Essay/>} />
             <Route path={"/essay/:essayID"} element={<EssayDisplay/>}/>
         </Routes>

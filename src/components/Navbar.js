@@ -1,39 +1,29 @@
-import React, { useState } from 'react';
-import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { Menu, Input, Avatar } from 'antd';
+import { HomeOutlined} from '@ant-design/icons';
+import { Menu} from 'antd';
 import { Link } from 'react-router-dom';
 
 import '../css/navbar.css';
 
 const items = [ 
   {
-    label: <Link to={"/"}>Homepage</Link>,
-    key: 'homepage',
+    label: <Link to={"/"}>Trang Chủ</Link>,
     icon: <HomeOutlined />,
   },
   {
     label: <Link to={"/essay"}>Essays</Link>,
-    key: 'essay',
-    icon: <HomeOutlined />,
   },
   {
-    label: <Avatar icon={<UserOutlined/>} size={"large"}/>,
-    key: 'user',
+    label: "Thông Tin",
   }
 ];
 const Navbar = () => {
-  const [current, setCurrent] = useState('');
- 
-  const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
 
   return( 
     <div className="navbar">
-      <div> LOGO </div>
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{width: "100%"}} theme="dark"/>
-    </div>);
+      <img src="example" className="logo"/>
+      <Menu mode="horizontal" items={items} style={{width: "100%"}} theme="light"/>
+    </div>
+  );
 };
 
 export default Navbar;

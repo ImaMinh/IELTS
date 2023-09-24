@@ -6,7 +6,6 @@ import { fetchTests } from "../api/api";
 import '../css/homepage.css';
 import { Content, Header } from "antd/es/layout/layout";
 import Introduction from "./Introduction";
-import cherryVideo from "../assets/cherry_video.mp4";
 
 const HomeBody = () => {
   const [data, setData] = useState(  {
@@ -20,8 +19,6 @@ const HomeBody = () => {
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
 
   const cardsPerPage = 9; // Number of cards to display per page
-
-  const isMobile = window.innerWidth <= 780;
 
   const fetchData = async (page) => {
     const testData = await fetchTests({ limit: cardsPerPage, page });
@@ -41,9 +38,9 @@ const HomeBody = () => {
       <>
         {/*Section for essays */}
         <Row>
-        <Col xs={0} sm={0} lg={2}/>
+        <Col xs={1} sm={4} lg={2}/>
 
-        <Col xs={24} sm={24} lg={20}>
+        <Col xs={22} sm={16} lg={20}>
             <Layout  className="essay-wrapper">
                 <Header className="essay-wrapper_header">
                     Essays
@@ -78,8 +75,8 @@ const HomeBody = () => {
                             <Col key={idx} xs={24} md={8} lg={8} xl={8}>
                                 <Link to={`/essay/${x.id}`}>
                                 {/* Card to display */}
-                                <Card title={x.title} hoverable={true}>
-                                  <div>{x.conclusion}</div>
+                                <Card title={x.title} hoverable={true} headStyle={{}}>
+                                  <div>{x.conclusion.substring(0,200)+"..."}</div>
                                 </Card>
                                 </Link>
                             </Col>
@@ -89,7 +86,7 @@ const HomeBody = () => {
             </Layout>
         </Col>
 
-        <Col xs={0} sm={0} lg={2}/>
+        <Col xs={1} sm={4} lg={2}/>
         </Row>
       </>
     );

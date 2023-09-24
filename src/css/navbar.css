@@ -1,12 +1,26 @@
 .navbar{
+    background-color: white;
+    border-bottom: 3px solid black;
+    padding: 1rem;
     position: sticky;
     top: 0;
     width: 100%;
     display: flex;
     align-items: center;
 }
+:where(.css-dev-only-do-not-override-byeoj0).ant-menu-light.ant-menu-horizontal, :where(.css-dev-only-do-not-override-byeoj0).ant-menu-light>.ant-menu.ant-menu-horizontal {
+    background-color: inherit;
+    color: inherit;
+    justify-content: end;
+    padding: 1rem;
+    font-size: x-large;
+    border-bottom: 0;
+}
 
-.highlight {
-    background-color: yellow;
-    font-weight: bold;
-  }
+:where(.css-dev-only-do-not-override-byeoj0) a:hover{
+    color: black;
+}
+
+.ant-menu-item{
+    color:black;
+}

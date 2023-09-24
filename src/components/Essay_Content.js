@@ -32,7 +32,7 @@ const EssayContent = ({ id }) =>{
                         <>
                             <h1>{essay.question}</h1>
                             {/*<h3>{essay.text}</h3>*/}
-                            {/*<h4>{essay.info}</h4>*/}
+                            <h4>{essay.outline.map((x)=>(<div>{x.outline}</div>))}</h4>
                             <p><div dangerouslySetInnerHTML={{ __html: essay.htmlAnswer }} /></p>
                         </>
                     ) : (

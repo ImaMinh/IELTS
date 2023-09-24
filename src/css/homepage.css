@@ -28,3 +28,13 @@
     background: transparent;
     border-bottom: 1px solid rgb(158, 149, 149);
 }
+
+
+.ant-card .ant-card-head-title {
+    display: inline-block;
+    flex: 1;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    padding: 1rem;
+}

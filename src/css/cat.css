@@ -1,0 +1,12 @@
+.link{
+    text-decoration: none;
+    color: black;
+    background-color: lightgreen;
+    font-size: large;
+    font-weight: 500;
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid black;
+}

@@ -1,0 +1,11 @@
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 500;
+    text-indent: 1.5rem;
+    font-size: large;
+    line-height: 2rem;
+}
