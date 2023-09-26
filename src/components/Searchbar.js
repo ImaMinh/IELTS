@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { Input, Pagination, Table } from "antd";
 import { searchTestsByTitle } from "../api/api";
@@ -6,27 +6,35 @@ import { searchTestsByTitle } from "../api/api";
 
 let nTimeout = null;
 const Searchbar = () => {
+  const LIMIT = 10;
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState(  {
         results: [],
         page: 1,
-        limit: 9,
+        limit: LIMIT,
         totalPages: 1,
         totalResults: 0,
       }
     );
     const [currentPage, setCurrentPage] = useState(1);
 
-    const delaySearch = async (keyword) => {
+    const delaySearch = async ({ keyword, limit = LIMIT, page = 1 } ) => {
       try {
-        const results = await searchTestsByTitle( { keyword });
+        const results = await searchTestsByTitle( { keyword, limit, page });
         setSearchResults(results);
       } catch (error) {
         console.error('Error searching for tests:', error);
         alert("search error");
       }
     };
-    
+
+    const search = async () => {
+      clearTimeout(nTimeout);
+      nTimeout = setTimeout(async () => {
+        await delaySearch({ keyword: searchTerm, page: currentPage })
+      }, 300);
+    };
+
     const handleSearch = async () => {
       const trimmedSearchTerm = searchTerm.trim();
 
@@ -36,11 +44,7 @@ const Searchbar = () => {
         return;
       }
 
-      clearTimeout(nTimeout);
-      nTimeout = setTimeout(async () => {
-        await delaySearch(searchTerm)
-      }, 300);
-
+      await search();
     };
 
     // keyword có thể trong question hoặc htmlAnswer
@@ -55,6 +59,12 @@ const Searchbar = () => {
       setCurrentPage(page)
     }
 
+  useEffect(() => {
+    if (searchTerm) {
+      search();
+    }
+  }, [currentPage, searchTerm ]);
+
     return (
       <div>
         <Input
@@ -63,7 +73,7 @@ const Searchbar = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyUp={handleSearch}
         />
-        
+
           {
             searchResults.length !== 0 && searchResults.results.map((result) => (
                 <ul
@@ -72,7 +82,7 @@ const Searchbar = () => {
                   <Link to={`/essay/${result._id}`}>{result.question}</Link>
                 </ul>
             ))}
-        
+
         <Pagination
           size="small"
           showTotal={(total) => `Total ${total} items`}
