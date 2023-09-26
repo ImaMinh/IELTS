@@ -44,7 +44,7 @@ const Searchbar = () => {
         return;
       }
 
-      await search();
+      // await search();
     };
 
     // keyword có thể trong question hoặc htmlAnswer
@@ -62,6 +62,8 @@ const Searchbar = () => {
   useEffect(() => {
     if (searchTerm) {
       search();
+    } else {
+      setSearchResults([]);
     }
   }, [currentPage, searchTerm ]);
 
@@ -71,7 +73,7 @@ const Searchbar = () => {
           placeholder="Tìm kiếm tại đây"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyUp={handleSearch}
+          // onKeyUp={handleSearch}
         />
 
           {
