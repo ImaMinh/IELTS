@@ -8,19 +8,11 @@
     display: flex;
     align-items: center;
 }
-:where(.css-dev-only-do-not-override-byeoj0).ant-menu-light.ant-menu-horizontal, :where(.css-dev-only-do-not-override-byeoj0).ant-menu-light>.ant-menu.ant-menu-horizontal {
+.ant-menu-light.ant-menu-horizontal{
     background-color: inherit;
     color: inherit;
     justify-content: end;
     padding: 1rem;
     font-size: x-large;
     border-bottom: 0;
-}
-
-:where(.css-dev-only-do-not-override-byeoj0) a:hover{
-    color: black;
-}
-
-.ant-menu-item{
-    color:black;
 }

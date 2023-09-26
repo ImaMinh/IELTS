@@ -4,7 +4,7 @@ import { Content, Footer, Header } from 'antd/es/layout/layout.js';
 import Introduction from './Introduction';
 import CAT from './CallToAction';
 import ExampleEssay from './Example_Essay';
-import HomeBody from './Homebody';
+
 
 const MinhLayout = ({ head, body, footer }) => {
     return (

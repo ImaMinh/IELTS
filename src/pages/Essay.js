@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, theme, Input, Typography } from "antd";
-import { AppstoreOutlined, HomeOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
+import { ConfigProvider, Row, Col } from "antd";
 import { fetchTests } from "../api/api";
-import Homepage from "./Homepage";
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
-const { Header, Content, Footer, Sider } = Layout;
-const {Text} = Typography;
+import HomeBody from "../components/Homebody";
 
 const Essay = () =>{
     const [data, setData] = useState([]);
@@ -22,44 +18,24 @@ const Essay = () =>{
     }, []);
 
     return(
-        <>
-        <Layout style={{minHeight: "100vh"}}>
-            <Navbar/>
-            <Layout>
-                <Header
-                style={{
-                    padding: 0,
-                    background: "white",
-                }}
-                />
-                <Content
-                style={{
-                    margin: '24px 16px 0',
-                }}
-                >
-                    <div>
-                        <h1>
-                            Search your essays here
-                        </h1>
-                    </div>
-                    <div><Text strong> with more than 1000 essays</Text></div>
-                    <div>
-                        <Searchbar></Searchbar>
-                    </div>
-                </Content>
-            </Layout>
-    </Layout>
-
-    <Layout>
-        <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-                >
-                ZD ©2023 Created by Han Duc Minh
-            </Footer>
-    </Layout>
-    </>
+        <ConfigProvider
+        theme={{
+          token:{
+            colorPrimary:"#000000",
+        }
+        }}>
+            
+            <section >
+                <Navbar/>
+            </section>
+            <Row>
+                <Col xs={1} lg={8}/>
+                <Col xs={22} lg={8}>
+                    <Searchbar/>
+                </Col>
+                <Col xs={1} lg={8}/>
+            </Row>
+        </ConfigProvider>
     )
 }
 

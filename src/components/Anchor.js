@@ -5,6 +5,7 @@ const Headings = () =>{
     return(
         <Anchor
             affix={true}
+            style={{margin:"1.5rem"}}
             items={[
             {
                 key: 'Question',

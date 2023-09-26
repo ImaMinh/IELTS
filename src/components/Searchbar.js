@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Input } from "antd";
-import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { fetchTests, searchTestsByTitle } from "../api/api";
-import '../css/homepage.css';
-import { Content, Header } from "antd/es/layout/layout";
-import Introduction from "./Introduction";
-import cherryVideo from "../assets/cherry_video.mp4";
-import "../css/navbar.css"
+import { Input, Pagination, Table } from "antd";
+import { searchTestsByTitle } from "../api/api";
+
 
 let nTimeout = null;
 const Searchbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState({ results: [] });
+    const [searchResults, setSearchResults] = useState(  {
+        results: [],
+        page: 1,
+        limit: 9,
+        totalPages: 1,
+        totalResults: 0,
+      }
+    );
+    const [currentPage, setCurrentPage] = useState(1);
 
     const delaySearch = async (keyword) => {
       try {
@@ -20,10 +23,12 @@ const Searchbar = () => {
         setSearchResults(results);
       } catch (error) {
         console.error('Error searching for tests:', error);
+        alert("search error");
       }
     };
+    
     const handleSearch = async () => {
-      const trimmedSearchTerm = searchTerm.trim(); // Trim leading and trailing spaces
+      const trimmedSearchTerm = searchTerm.trim();
 
       if (trimmedSearchTerm === '') {
         // If the trimmed search term is empty, clear search results.
@@ -39,33 +44,44 @@ const Searchbar = () => {
     };
 
     // keyword có thể trong question hoặc htmlAnswer
-    const highlightKeywords = (result) => {
-      const { htmlAnswer, question } = result;
-      const keywords = searchTerm.split(/\s+/); // Split search term into keywords
-      const regex = new RegExp(`(${keywords.join('|')})`, 'gi'); // Create regex pattern
-      return htmlAnswer.replace(regex, '<span class="highlight">$1</span>'); // Wrap keywords in <span> tags for highlighting
-    };
+    // const highlightKeywords = (result) => {
+    //   const { htmlAnswer, question } = result;
+    //   const keywords = searchTerm.split(/\s+/); // Split search term into keywords
+    //   const regex = new RegExp(`(${keywords.join('|')})`, 'gi'); // Create regex pattern
+    //   return htmlAnswer.replace(regex, '<span class="highlight">$1</span>'); // Wrap keywords in <span> tags for highlighting
+    // };
+
+    const handlePageChange = (page) =>{
+      setCurrentPage(page)
+    }
 
     return (
       <div>
         <Input
-          placeholder="Enter search term"
+          placeholder="Tìm kiếm tại đây"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyUp={handleSearch}
         />
-        {/* <button onClick={handleSearch}>Search</button> */}
+        
+          {
+            searchResults.length !== 0 && searchResults.results.map((result) => (
+                <ul
+                  key={result._id}
+                >
+                  <Link to={`/essay/${result._id}`}>{result.question}</Link>
+                </ul>
+            ))}
+        
+        <Pagination
+          size="small"
+          showTotal={(total) => `Total ${total} items`}
+          showSizeChanger={false}
 
-        <ul>
-          {searchResults.results.map((result) => (
-            <li
-              key={result._id}
-              // dangerouslySetInnerHTML={{ __html: highlightKeywords(result.textAnswer) }}
-              dangerouslySetInnerHTML={{ __html: highlightKeywords(result) }}
-            />
-
-          ))}
-        </ul>
+          defaultCurrent={searchResults.page}
+          total={searchResults.totalResults}
+          pageSize={searchResults.limit}
+          onChange={handlePageChange} />
       </div>
     );
   };
