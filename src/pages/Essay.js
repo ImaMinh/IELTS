@@ -3,7 +3,6 @@ import { ConfigProvider, Row, Col } from "antd";
 import { fetchTests } from "../api/api";
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
-import HomeBody from "../components/Homebody";
 
 const Essay = () =>{
     const [data, setData] = useState([]);
@@ -24,13 +23,14 @@ const Essay = () =>{
             colorPrimary:"#000000",
         }
         }}>
-            
+
             <section >
                 <Navbar/>
             </section>
             <Row>
                 <Col xs={1} lg={8}/>
                 <Col xs={22} lg={8}>
+                    {/*<SearchBox />*/}
                     <Searchbar/>
                 </Col>
                 <Col xs={1} lg={8}/>
