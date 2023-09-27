@@ -1,4 +1,4 @@
-.results-list{
+/* .results-list{
     width: 100%;
     background-color: white;
     display: flex;
@@ -12,7 +12,7 @@
     border: 1px solid #ccc;
     z-index: 1000;
     
-}
+} */
 
 .search-container{
     position: relative;

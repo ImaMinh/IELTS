@@ -4,6 +4,7 @@ import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, T
 import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { fetchTests } from "../api/api";
 import EssayContent from "../components/Essay_Content";
+import Searchbar from "../components/Searchbar";
 
 const { Content, Header, Footer, Sider } = Layout;
 const {Text} = Typography;
@@ -42,7 +43,7 @@ const EssayDisplay = () =>{
                     background: "white",
                 }}
                 >
-                    <Input placeholder="search essays here"></Input>
+                    <Searchbar/>
                 </Header>
                 <Content
                 style={{

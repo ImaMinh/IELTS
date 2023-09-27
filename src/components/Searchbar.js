@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-import { Input, Pagination} from "antd";
+import { Input, Pagination, Popover} from "antd";
 import { searchTestsByTitle } from "../api/api";
 import "../css/searchbar.css"
 import HomeBody from "../components/Homebody.js";
@@ -59,6 +59,7 @@ const Searchbar = () => {
     }
   }, [currentPage, searchTerm ]);
 
+  var isOpen = (searchResults.length !== 0 && searchTerm != "");
     return (
       <div className="search-container">
         <Input
@@ -67,27 +68,34 @@ const Searchbar = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           // onKeyUp={handleSearch}
         />
-        <div className="results-list">
-          {
-            searchResults.length !== 0 && searchTerm != "" && searchResults.results.map((result) => (
+        
+        <Popover 
+          content={(
+            <div>
+              {isOpen != false && searchResults.results.map((result) => (
                 <div
                   key={result._id}
                 >
                   <Link to={`/essay/${result._id}`}>{result.question}</Link>
                 </div>
-            ))}
-        {searchResults.results.length !== 0 && searchTerm !== "" ? (
-  <Pagination
-    size="small"
-    showTotal={(total) => `Total ${total} items`}
-    showSizeChanger={false}
-    defaultCurrent={currentPage}
-    total={searchResults.totalResults}
-    pageSize={searchResults.limit}
-    onChange={handlePageChange}
-  />
-) : null}
-        </div>
+                ))
+              }
+              <Pagination
+                size="small"
+                showTotal={(total) => `Total ${total} items`}
+                showSizeChanger={false}
+                defaultCurrent={currentPage}
+                total={searchResults.totalResults}
+                pageSize={searchResults.limit}
+                onChange={handlePageChange}
+              />
+            </div>
+            )}
+          title="results"
+          open = {isOpen}
+        >
+       
+        </Popover>
       </div>
     );
   };
