@@ -109,7 +109,7 @@ const Searchbar = () => {
 
           defaultCurrent={searchResults.page}
           total={searchResults.totalResults}
-          // pageSize={searchResults.limit}
+          pageSize={searchResults.limit}
           onChange={handlePageChange}/>
       </div>
     )
