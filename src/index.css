@@ -13,3 +13,13 @@ code {
   font-family: 'Times New Roman', Times, serif,
     monospace;
 }
+
+ul.results {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.results li {
+  padding-bottom: 5px;
+}
