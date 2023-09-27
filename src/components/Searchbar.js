@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-import { Input, Pagination, Table } from "antd";
+import { Input, Pagination} from "antd";
 import { searchTestsByTitle } from "../api/api";
+import "../css/searchbar.css"
+import HomeBody from "../components/Homebody.js";
 
 
 let nTimeout = null;
@@ -44,16 +46,8 @@ const Searchbar = () => {
         return;
       }
 
-      await search();
+      //await search();
     };
-
-    // keyword có thể trong question hoặc htmlAnswer
-    // const highlightKeywords = (result) => {
-    //   const { htmlAnswer, question } = result;
-    //   const keywords = searchTerm.split(/\s+/); // Split search term into keywords
-    //   const regex = new RegExp(`(${keywords.join('|')})`, 'gi'); // Create regex pattern
-    //   return htmlAnswer.replace(regex, '<span class="highlight">$1</span>'); // Wrap keywords in <span> tags for highlighting
-    // };
 
     const handlePageChange = (page) =>{
       setCurrentPage(page)
@@ -66,32 +60,34 @@ const Searchbar = () => {
   }, [currentPage, searchTerm ]);
 
     return (
-      <div>
+      <div className="search-container">
         <Input
           placeholder="Tìm kiếm tại đây"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyUp={handleSearch}
+          // onKeyUp={handleSearch}
         />
-
+        <div className="results-list">
           {
-            searchResults.length !== 0 && searchResults.results.map((result) => (
-                <ul
+            searchResults.length !== 0 && searchTerm != "" && searchResults.results.map((result) => (
+                <div
                   key={result._id}
                 >
                   <Link to={`/essay/${result._id}`}>{result.question}</Link>
-                </ul>
+                </div>
             ))}
-
-        <Pagination
-          size="small"
-          showTotal={(total) => `Total ${total} items`}
-          showSizeChanger={false}
-
-          defaultCurrent={searchResults.page}
-          total={searchResults.totalResults}
-          pageSize={searchResults.limit}
-          onChange={handlePageChange} />
+        {searchResults.results.length !== 0 && searchTerm !== "" ? (
+  <Pagination
+    size="small"
+    showTotal={(total) => `Total ${total} items`}
+    showSizeChanger={false}
+    defaultCurrent={currentPage}
+    total={searchResults.totalResults}
+    pageSize={searchResults.limit}
+    onChange={handlePageChange}
+  />
+) : null}
+        </div>
       </div>
     );
   };

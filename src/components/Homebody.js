@@ -11,7 +11,7 @@ const HomeBody = () => {
   const [data, setData] = useState(  {
       results: [],
       page: 1,
-      limit: 9,
+      limit: 10,
       totalPages: 1,
       totalResults: 0,
     }

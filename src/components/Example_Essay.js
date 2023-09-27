@@ -95,8 +95,8 @@ const ExampleEssay = () =>{
             <Col xs={0} lg={8}/>
             <Col xs={24} lg={8}>
             <div>
-                <h1>Essay mẫu:</h1>
-                <h1 id="question"> <Typewriter text={essayData.question} /></h1>
+                <h1 id="question">Essay mẫu:</h1>
+                <h1> <Typewriter text={essayData.question} /></h1>
                 <h3 id="outline">Outline:</h3>
                 <p>{essayData.outline.map((x)=>(<div>{x.outline}</div>))}</p>
                 <p id="essay"><div dangerouslySetInnerHTML={{ __html: essayData.htmlAnswer }} style={{fontWeight:"light"}}/></p>
