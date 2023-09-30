@@ -98,11 +98,6 @@ const HomeBody = () => {
 
   return (
     <div style={{minHeight: "100vh"}}>
-        <Row>
-            <Col span={24}>
-                <Introduction/>
-            </Col>
-        </Row>
         <br/>
         <br/>
 

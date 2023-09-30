@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Spin } from "antd";
-import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { Spin, Typography, Row, Col } from "antd";
 import { fetchTest } from "../api/api";
-import '../css/homepage.css';
-import { Content, Header } from "antd/es/layout/layout";
-import Introduction from "./Introduction";
+import Headings from "./Anchor";
+import Navbar from "./Navbar";
+import '../css/essaycontent.css';
+
+const Text = Typography;
 
 const EssayContent = ({ id }) =>{
     const [essay, setEssay] = useState([]);
@@ -21,22 +21,33 @@ const EssayContent = ({ id }) =>{
         fetchData();
     }, []);
 
+    const isMobile = window.innerWidth < 720;
 
     return (
         <div>
             {isLoading ? (
-                <Spin /> // Display a loading indicator while fetching data
+                <Spin/>
             ) : (
                 <div>
                     {essay ? (
-                        <>
-                            <h1>{essay.question}</h1>
-                            {/*<h3>{essay.text}</h3>*/}
-                            <h4>{essay.outline.map((x)=>(<div>{x.outline}</div>))}</h4>
-                            <p><div dangerouslySetInnerHTML={{ __html: essay.htmlAnswer }} /></p>
-                        </>
+                                <Row style={{paddingTop: "1.5rem", paddingBottom: "1.5rem"}}>
+                                    <Col xs={2} lg={6}/>
+                                    <Col xs={18} lg={12}>
+                                        <div>
+                                            <h1 id="question">Đề bài:</h1>
+                                            <h1> {essay.question}</h1>
+                                            <h3 id="outline">Outline:</h3>
+                                            <p>{essay.outline.map((x)=>(<div>{x.outline}</div>))}</p>
+                                            <p id="essay"><div dangerouslySetInnerHTML={{ __html: essay.htmlAnswer }}/></p>
+                                            <Text type="secondary">{essay.updatedAt}</Text>
+                                        </div>
+                                    </Col>
+                                    <Col xs={4} lg={6} className="rightCol">
+                                        {isMobile ? null : (<Headings/>)}
+                                    </Col>
+                                </Row>
                     ) : (
-                        <p>Essay not found.</p>
+                        <p> Essay not found.</p>
                     )}
                 </div>
             )}
