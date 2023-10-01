@@ -139,7 +139,8 @@ const Searchbar = () => {
       onOpenChange={handleOpenChange}
       overlayStyle={{
         width: isMobile ? "90vw" : "50vw",
-        maxHeight: "auto",
+        maxHeight: "700px",
+		overflowY: "scroll"
       }}
     >
       <Input

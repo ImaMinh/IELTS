@@ -99,7 +99,7 @@ const ExampleEssay = () =>{
                 <h1> <Typewriter text={essayData.question} /></h1>
                 <h3 id="outline">Outline:</h3>
                 <p>{essayData.outline.map((x)=>(<div>{x.outline}</div>))}</p>
-                <p id="essay"><div dangerouslySetInnerHTML={{ __html: essayData.htmlAnswer }} style={{fontWeight:"light"}}/></p>
+                <div id="essay" dangerouslySetInnerHTML={{ __html: essayData.htmlAnswer }} style={{fontWeight:"light"}}/>
                 <Text type="secondary">{essayData.updatedAt}</Text>
             </div>
             </Col>
