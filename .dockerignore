@@ -11,3 +11,5 @@ __tests__
 dist
 
 docker_ver.txt
+.env
+.env.development
