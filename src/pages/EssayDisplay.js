@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, Typography, Input} from "antd";
+import { Card, Divider, Space, Row, Col, Pagination, Layout, Breadcrumb, Menu, Typography, Input, ConfigProvider} from "antd";
 import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { fetchTests } from "../api/api";
 import EssayContent from "../components/Essay_Content";
@@ -10,41 +10,34 @@ const { Content, Header, Footer, Sider } = Layout;
 const {Text} = Typography;
 
 const EssayDisplay = () =>{
-    const {essayID} = useParams();
-
+    const { essayID } = useParams();
+    console.log("Essay ID:", essayID);
+    
     return(
         <>
+        <ConfigProvider
+            theme={{
+                token:{
+                colorPrimary:"#000000",
+                }
+            }}
+        >
         <Layout hasSider style={{minHeight: "100vh"}}>
             <Sider
                 collapsedWidth="0"
                 collapsible
-                theme="dark"
+                theme="light"
                 defaultCollapsed="true"
-                style={{position: "fixed", height: "100vh", top: "0", bottom: "0", zIndex: 1}}
+                style={{position: "fixed", zIndex: 1, height: "100%"}}
             >
-                <div className="demo-logo-vertical" />
-                <Menu
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={['4']}
-                items={[
-                    {
-                        label: <Link to={"/"}>Homepage</Link>,
-                        key: "search-bar"
-                    }
-                ]}
-
-                />
+                <Row style={{paddingTop: "1.5rem", paddingBottom: "1.5rem"}}>
+                    <Col xs={0} lg={8}/>
+                    <Col xs={24} lg={8}></Col>
+                        <Searchbar/>
+                    <Col xs={0} lg={8}/>
+                </Row>
             </Sider>
             <Layout>
-                <Header
-                style={{
-                    padding: 0,
-                    background: "white",
-                }}
-                >
-                    <Searchbar/>
-                </Header>
                 <Content
                 style={{
                     margin: '24px 16px 0',
@@ -66,6 +59,7 @@ const EssayDisplay = () =>{
                 ZD ©2023 Created by Han Duc Minh
             </Footer>
     </Layout>
+    </ConfigProvider>
     </>
     )
 }

@@ -1,0 +1,40 @@
+div p{
+    font-weight: 400;
+}
+
+div h3{
+    font-weight: 500;
+    line-height: 2rem;
+}
+
+@media only screen and (max-width: 480px) {
+    div p{
+        font-size: 4vw;
+        line-height: 1rem;
+    }
+
+    div h2{
+        font-size: 4vw;
+    }
+
+    div h3{
+        font-size: 3vw;
+        line-height: 1rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    div p{
+        font-size: 2.5vw;
+    }
+
+    div h2{
+        font-size: 2.4vw;
+    }
+
+    div h3{
+        font-size: 2.5vw;
+        line-height: 1rem;
+        font-weight: 490;
+    }
+}

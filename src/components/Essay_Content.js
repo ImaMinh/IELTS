@@ -19,7 +19,7 @@ const EssayContent = ({ id }) =>{
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [id]);
 
     function convert2Outline(a) {
         let b = a.filter((x) => x.type == "heading");
@@ -55,7 +55,7 @@ const EssayContent = ({ id }) =>{
         );
     }
 
-    const isMobile = window.innerWidth < 720;
+    const isMobile = window.innerWidth < 768;
 
     return (
         <div>
@@ -65,18 +65,19 @@ const EssayContent = ({ id }) =>{
                 <div>
                     {essay ? (
                                 <Row style={{paddingTop: "1.5rem", paddingBottom: "1.5rem"}}>
-                                    <Col xs={2} lg={6}/>
-                                    <Col xs={18} lg={12}>
+                                    <Col xs={1} md={4} lg={6}/>
+                                    <Col xs={22} md={16} lg={12}>
                                     <div>
-                                        <h1 id="question">Đề bài:</h1>
-                                        <h1> {essay.question}</h1>
-                                        <h3 id="outline">Outline:</h3>
-                                        <p>{essay.outline.map((x)=>(<div>{x.outline}</div>))}</p>
-                                        <div id="essay" dangerouslySetInnerHTML={{ __html: essay.htmlAnswer }}/>
-                                        <Text type="secondary">{essay.updatedAt}</Text>
+                                        <h2 id="question">Question:</h2>
+                                        <h3> {essay.question}</h3>
+                                        <h2 id="outline">Outline:</h2>
+                                        <h3>{essay.outline.map((x)=>(<><div>{x.outline}</div></>))}</h3>
+                                        <h2 id="essay"> Essay:</h2>
+                                        <div dangerouslySetInnerHTML={{ __html: essay.htmlAnswer }}/>
+                                        <Text type="secondary">{essay._createdAt}</Text>
                                     </div>
                                     </Col>
-                                    <Col xs={4} lg={6} className="rightCol">
+                                    <Col xs={1} md={4} lg={6} className="rightCol">
                                         {isMobile ? null : (<Headings/>)}
                                     </Col>
                                 </Row>

@@ -88,23 +88,26 @@ const ExampleEssay = () =>{
           </div>
         );
     };
-  
+    
+    const isMobile = window.innerWidth < 768;
+
     return (
       <>
         <Row style={{paddingTop: "1.5rem", paddingBottom: "1.5rem"}}>
-            <Col xs={0} lg={8}/>
-            <Col xs={24} lg={8}>
-            <div>
-                <h1 id="question">Essay mẫu:</h1>
-                <h1> <Typewriter text={essayData.question} /></h1>
-                <h3 id="outline">Outline:</h3>
-                <p>{essayData.outline.map((x)=>(<div>{x.outline}</div>))}</p>
-                <div id="essay" dangerouslySetInnerHTML={{ __html: essayData.htmlAnswer }} style={{fontWeight:"light"}}/>
-                <Text type="secondary">{essayData.updatedAt}</Text>
-            </div>
+            <Col xs={1} md={4} lg={6}/>
+            <Col xs={22} md={16} lg={12}>
+              <div>
+                  <h2 id="question">Question:</h2>
+                  <h3> <Typewriter text={essayData.question}/></h3>
+                  <h2 id="outline">Outline:</h2>
+                  <h3>{essayData.outline.map((x)=>(<><div>{x.outline}</div></>))}</h3>
+                  <h2 id="essay"> Essay:</h2>
+                  <div dangerouslySetInnerHTML={{ __html: essayData.htmlAnswer }}/>
+                  <Text type="secondary">{essayData.createdAt}</Text>
+              </div>
             </Col>
-            <Col xs={0} lg={8} className="rightCol">
-                <Headings/>
+            <Col xs={1} md={4} lg={6} className="rightCol">
+                {isMobile ? null : (<Headings/>)}
             </Col>
         </Row>
       </>
