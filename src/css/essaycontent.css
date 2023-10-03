@@ -34,7 +34,11 @@ div h3{
 
     div h3{
         font-size: 2.5vw;
-        line-height: 1rem;
+        line-height: 1.6rem;
         font-weight: 490;
     }
+}
+
+.ant-affix{
+    z-index: 0;
 }

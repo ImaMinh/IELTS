@@ -21,6 +21,34 @@ const Searchbar = () => {
 	const [currentPage, setCurrentPage] = useState(1);
   const [open, setOpen] = useState(false);
 
+	const items = [
+		{
+			key: '1',
+			label: (
+				<a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+					1st menu item
+				</a>
+			),
+		},
+		{
+			key: '2',
+			label: (
+				<a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+					2nd menu item (disabled)
+				</a>
+			),
+			disabled: true,
+		},
+		{
+			key: '3',
+			label: (
+				<a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+					3rd menu item (disabled)
+				</a>
+			),
+			disabled: true,
+		},
+	]
 
 
 	const delaySearch = async ({keyword, limit = LIMIT, page = 1}) => {
@@ -67,10 +95,10 @@ const Searchbar = () => {
   const renderSearchResults = () => {
     return (
       <div>
-        <ul>
+        <ul style={{listStyleType: "none", margin: 0, paddingLeft: "1rem"}}>
         {searchResults.length !== 0 && searchResults.results.map((result, idx) => (
           <li key={idx} className={"results"}>
-            <Link to={`/essay/${result._id}`} className="result-item">{result.question}</Link>
+            <div style={{marginRight: "0.6rem"}}>#</div><Link to={`/essay/${result._id}`} className="result-item">{result.question}</Link>
           </li>
         ))}
         </ul>
@@ -84,6 +112,7 @@ const Searchbar = () => {
           pageSize={searchResults.limit}
           onChange={handlePageChange}
 		  current={currentPage}
+		  style={{paddingTop: "1rem"}}
 		  />
       </div>
     )
@@ -116,7 +145,7 @@ const Searchbar = () => {
       }}
     >
       <Input
-        placeholder="Tìm kiếm tại đây"
+        placeholder="Tìm kiếm tại đây 🔎"
         value={searchTerm}
         onChange={(e) => onChangeTerm(e.target.value)}
       />

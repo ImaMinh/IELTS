@@ -5,6 +5,7 @@ import { AppstoreOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { fetchTests } from "../api/api";
 import EssayContent from "../components/Essay_Content";
 import Searchbar from "../components/Searchbar";
+import Sidebar from "../components/Sidebar";
 
 const { Content, Header, Footer, Sider } = Layout;
 const {Text} = Typography;
@@ -22,45 +23,16 @@ const EssayDisplay = () =>{
                 }
             }}
         >
-        <Layout hasSider style={{minHeight: "100vh"}}>
-            <Sider
-                collapsedWidth="0"
-                collapsible
-                theme="light"
-                defaultCollapsed="true"
-                style={{position: "fixed", zIndex: 1, height: "100%"}}
-            >
-                <Row style={{paddingTop: "1.5rem", paddingBottom: "1.5rem"}}>
-                    <Col xs={0} lg={8}/>
-                    <Col xs={24} lg={8}></Col>
-                        <Searchbar/>
-                    <Col xs={0} lg={8}/>
-                </Row>
-            </Sider>
-            <Layout>
-                <Content
-                style={{
-                    margin: '24px 16px 0',
-                }}
-                >
+            <Layout hasSider style={{minHeight: "100vh"}}>
+                <Sidebar></Sidebar>
+                <Layout>
                     <div>
                         <EssayContent id={essayID}/>
                     </div>
-                </Content>
+                </Layout>
             </Layout>
-    </Layout>
-
-    <Layout>
-        <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-                >
-                ZD ©2023 Created by Han Duc Minh
-            </Footer>
-    </Layout>
-    </ConfigProvider>
-    </>
+        </ConfigProvider>
+        </>
     )
 }
 

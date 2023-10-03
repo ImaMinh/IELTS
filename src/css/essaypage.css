@@ -1,4 +1,6 @@
 .search-container{
     min-height: 100vh;
     padding-top: 10rem;
+    display: flex;
+    justify-content: center;
 }
